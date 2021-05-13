@@ -52,11 +52,29 @@ See `config.yml` in this repository for an example of configuring Probr.  If you
 
 _Note: Different service packs have different requirements, Please see individual service pack documentation for information on the required and default configuations for those packs._
 
-### CLI Usage
+### Run the CLI
 
-1. Run the probr executable via `./probr [OPTIONS]`.
-    - Additional options can be seen via `./probr --help`
-    - Review required variables by using `./probr show-requirements <SERVICE-PACK-NAME; optional>`
+1. Run the probr executable via `./probr [OPTIONS]`.  By default it will look for `config.yml` in the same location that you run probr from.
+    - If your binaries aren't in `${HOME}/probr/binaries` then use `-binaries-path=<path>`.
+    - Other options can be seen via `./probr --help`
+
+### View the results
+
+The default location for Probr output is `${HOME}/probr/output/<date>/<time>/<service_pack>`. There are various output files, as follows...
+
+#### Summary results
+
+`summary.json` displays an overall summary of the Probr results.
+
+#### Cucumber results
+
+In the `cucumber` sub-folder the Probr results are displayed in a standard "Cucumber" JSON format, which can be fed into your favourite Cucumber parser or visualisation tool.
+
+#### Audit trail
+
+In the `audit` sub-folder, there is an audit trail of every step the service pack executed in deploying the probe.  For example, the Kubernetes service pack audit trail captures the exact pod specifications that were deployed for each probe and the response received from Kubernetes.
+
+## More configuration
 
 ### Environment Variables
 
@@ -72,7 +90,7 @@ You may have as many vars files as you wish in your codebase, which will enable 
 The location of the vars file is passed as a CLI option e.g.
 
 ```
-probr --varsFile=./config-dev.yml
+./probr --varsFile=./config-dev.yml
 ```
 
 ### Probr Configuration Variables
